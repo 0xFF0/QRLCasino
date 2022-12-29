@@ -129,9 +129,7 @@ EOF
 
 
 # Python setup
-python3 -m venv --system-site-packages .venv
-source .venv/bin/activate
-.venv/bin/pip install -r requirements.txt
+pip install -r requirements.txt
 
 
 # Start docker-compose
