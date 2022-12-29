@@ -1,0 +1,9 @@
+bot:
+  token: YOUR_DISCORD_BOT_TOKEN
+  owner_ids:
+    - 123456789987654321
+  prefix: +
+  default_bet: 1
+  bonus_multiplier: 10 # bonus = default_bet * multiplier
+  bonus_cooldown: 12 # Bonus every x hours
+  qrl_addr: YOUR_QRL_CASINO_ADDR # Need to have the private key in qrlData/Mainnet/walletd.json

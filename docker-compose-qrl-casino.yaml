@@ -1,0 +1,32 @@
+version: '3'
+volumes:
+  portainer_data:
+services:
+  qrlcasino_wallet:
+    build: 
+      context: dockerfiles
+      dockerfile: QRL_wallet.docker
+    container_name: qrlcasino_wallet
+    restart: unless-stopped
+    volumes:
+      - ./qrlData/Mainnet:/root/.qrl
+      - ./qrlData/Testnet:/root/.qrl-testnet
+    ports:
+      - 127.0.0.1:19009:19009            #public API 
+      - 127.0.0.1:5359:5359            #wallet api
+    command:
+      /RunWallet.sh
+  qrlcasino_portainer:
+    image: portainer/portainer-ce:latest
+    container_name: qrlcasino_portainer
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./portainer-data:/data
+    ports:
+      - 127.0.0.1:9000:9000
+
+

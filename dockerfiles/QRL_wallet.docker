@@ -1,0 +1,31 @@
+FROM ubuntu:20.04
+
+# Requirements
+RUN apt update && apt upgrade -y
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install swig3.0 python3-dev python3-pip build-essential cmake pkg-config libssl-dev libffi-dev libhwloc-dev libboost-dev git wget curl
+
+
+# Install go
+RUN wget "https://go.dev/dl/go1.17.7.linux-amd64.tar.gz"
+RUN tar -C /usr/local -xzf go1.17.7.linux-amd64.tar.gz
+
+
+ENV PATH "$PATH:/usr/local/go/bin"
+
+
+# Install qrl node Ubuntu
+RUN pip3 install -U setuptools
+RUN pip3 install -U qrl
+
+
+# go get the walletd-rest-proxy
+RUN go install github.com/theQRL/walletd-rest-proxy@latest
+
+
+ADD RunWallet.sh .
+RUN ["chmod", "+x", "RunWallet.sh"]
+
+
+
+
+
