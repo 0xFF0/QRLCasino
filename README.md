@@ -11,15 +11,15 @@ Commands     |  Screenshot
 :-------------------------:|:-------------------------:
 Slots |  <p align="center">  <img width="50%" height="50%" src="img/slots.png"> </p>
 Blackjack | <p align="center">  <img width="50%" height="50%" src="img/blackjack.png"> </p>
-Flip | <p align="center">  <img width="50%" height="50%" src="img/flip.png"> </p>
-Roll | <p align="center">  <img width="50%" height="50%" src="img/roll.png"> </p>
-Help | <p align="center">  <img width="50%" height="50%" src="img/help.png"> </p>
-QRL | <p align="center">  <img width="50%" height="50%" src="img/qrl.png"> </p>
-Faucet | <p align="center">  <img width="50%" height="50%" src="img/faucet.png"> </p>
-Deposit | <p align="center">  <img width="50%" height="50%" src="img/deposit.png"> </p>
-Withdraw | <p align="center">  <img width="50%" height="50%" src="img/withdraw.png"> </p>
-Sync | <p align="center">  <img width="50%" height="50%" src="img/sync.png"> </p>
-Leaderboard | <p align="center">  <img width="50%" height="50%" src="img/leaderboard.png"> </p>
+Flip | <p align="center">  <img width="35%" height="35%" src="img/flip.png"> </p>
+Roll | <p align="center">  <img width="35%" height="35%" src="img/roll.png"> </p>
+Help | <p align="center">  <img width="35%" height="35%" src="img/help.png"> </p>
+QRL | <p align="center">  <img width="35%" height="35%" src="img/qrl.png"> </p>
+Faucet | <p align="center">  <img width="35%" height="35%" src="img/faucet.png"> </p>
+Deposit | <p align="center">  <img width="45%" height="45%" src="img/deposit.png"> </p>
+Withdraw | <p align="center">  <img width="75%" height="75%" src="img/withdraw.png"> </p>
+Sync | <p align="center">  <img width="35%" height="35%" src="img/sync.png"> </p>
+Leaderboard | <p align="center">  <img width="35%" height="35%" src="img/leaderboard.png"> </p>
 
 
 
