@@ -26,8 +26,8 @@ class Gambling(commands.Cog):
             raise InsufficientFundsException(current, bet)
 
     @commands.command(
-        brief="Flip a coin\nBet must be greater than $0",
-        usage=f"flip [heads|tails] *[bet- default=${DEFAULT_BET}]",
+        brief="Flip a coin\nBet must be greater than 0 QRL",
+        usage=f"flip [heads|tails] *[bet- default={DEFAULT_BET} QRL]",
     )
     async def flip(
         self,
@@ -67,8 +67,8 @@ class Gambling(commands.Cog):
             raise BadArgument()
 
     @commands.command(
-        brief="Roll 1 die\nBet must be greater than $0",
-        usage=f"roll [guess:1-6] *[bet- default=${DEFAULT_BET}]"
+        brief="Roll 1 die\nBet must be greater than 0 QRL",
+        usage=f"roll [guess:1-6] *[bet- default={DEFAULT_BET} QRL]"
     )
     async def roll(
         self,
