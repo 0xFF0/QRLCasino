@@ -80,8 +80,8 @@ class Blackjack(commands.Cog):
 
     @commands.command(
         aliases=['bj'],
-        brief="Play a simple game of blackjack.\nBet must be greater than $0",
-        usage=f"blackjack [bet- default=${DEFAULT_BET}]"
+        brief="Play a simple game of blackjack.\nBet must be greater than 0 QRL",
+        usage=f"blackjack [bet- default={DEFAULT_BET} QRL]"
     )
     async def blackjack(self, ctx: commands.Context, bet: int=DEFAULT_BET):
         self.check_bet(ctx, bet)
