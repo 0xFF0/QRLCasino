@@ -132,10 +132,11 @@ class Economy:
                 res = wallet.transfer(user_qrl_addr, QRL_ADDR, str(balances))
                 if 'tx' in res:
                     qrl_amount = math.floor(qrl.from_atomic(balances))                                   
-                    thread = threading.Thread(target=self.wait_for_transfer, args=(user_id, user_qrl_addr, qrl_amount))
+                    thread = threading.Thread(target=self.wait_for_transfer, args=(user_id, user_qrl_addr, qrl_amount, res))
                     thread.start()
-                    self.add_money(user_id, qrl_amount)
-                    return(f'{qrl_amount} QRL added to your account.')
+                    #self.add_money(user_id, qrl_amount)
+                    return(f'{qrl_amount} QRL will be added to your account soon.')             
+
                 elif 'error' in res:
                     self.set_sync_in_progress(user_id,0)
                     return(f'There was a problem sending QRL: {res["error"]}')
@@ -149,15 +150,17 @@ class Economy:
             return('Sync in progress, please try again later')
 
 
-    def wait_for_transfer(self, user_id, user_qrl_addr, qrl_amount):
-        balance = 1
-               
-        while balance > 0:
-            balance = Decimal(wallet.balances(user_qrl_addr))
-            if balance > 0:
-                sleep(10)
-            else:              
+    def wait_for_transfer(self, user_id, user_qrl_addr, qrl_amount, res):
+        notConfirm = True
+        while notConfirm:
+            nbConf = wallet.get_transaction(res["tx"]["transaction_hash"])["confirmations"]
+            print(f"Sync nbConf: {nbConf}")
+            if int(nbConf) > 0:
+                notConfirm = False
                 self.set_sync_in_progress(user_id,0)
+                self.add_money(user_id, qrl_amount)
+            else:
+                sleep(10) 
         
                 
     def random_entry(self) -> Entry:
@@ -165,5 +168,5 @@ class Economy:
         return random.choice(self.cur.fetchall())
 
     def top_entries(self, n: int=0) -> List[Entry]:
-        self.cur.execute("SELECT * FROM economy ORDER BY qrl DESC")
-        return (self.cur.fetchmany(n) if n else self.cur.fetchall())
+        self.cur.execute(f"SELECT * FROM economy ORDER BY qrl DESC LIMIT {n}")
+        return (self.cur.fetchall())
