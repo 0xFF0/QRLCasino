@@ -90,17 +90,25 @@ class GamblingHelpers(commands.Cog, name='QRL'):
         usage="withdraw [addr] *[amount]",
         aliases=["w"]
     )
-    async def withdraw(self, ctx: commands.Context, dest_addr: str, amount_to_withdraw: int=-1):
+    async def withdraw(self, ctx: commands.Context, dest_addr: str, amount_to_withdraw: int=-1, user: discord.Member=None):
         user_id = ctx.author.id      
         profile = self.economy.get_entry(user_id)
-        
+
+        user = user.id if user else ctx.author.id
+        user = self.client.get_user(user)        
         if profile[1] > 0:
             if amount_to_withdraw <= 0:
                 amount_to_withdraw = profile[1]
                 
             if profile[1] >= amount_to_withdraw:
                 msg = self.economy.withdraw(user_id, dest_addr, amount_to_withdraw)
-                await ctx.send(msg) 
+                embed = make_embed(
+                    title=user.name,
+                    description=(msg),
+                    footer=discord.Embed.Empty
+                )
+                embed.set_thumbnail(url=user.avatar_url)
+                await ctx.send(embed=embed)  
         else:
             await ctx.send(f"No QRL to withdraw.")  
 
@@ -109,10 +117,19 @@ class GamblingHelpers(commands.Cog, name='QRL'):
         usage="sync",
         aliases=["s"]
     )
-    async def sync(self, ctx: commands.Context):
+    async def sync(self, ctx: commands.Context, user: discord.Member=None):
         user_id = ctx.author.id
+        user = user.id if user else ctx.author.id
+        user = self.client.get_user(user)
+        await ctx.send(f"Sync started, trying to transfer QRL to the casino account. Please wait, this could take a couple of minutes") 
         msg = self.economy.sync(user_id)
-        await ctx.send(msg)       
+        embed = make_embed(
+            title=user.name,
+            description=(msg),
+            footer=discord.Embed.Empty
+        )
+        embed.set_thumbnail(url=user.avatar_url)
+        await ctx.send(embed=embed)      
 
 def setup(client: commands.Bot):
     client.add_cog(GamblingHelpers(client))
